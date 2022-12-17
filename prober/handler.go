@@ -34,11 +34,12 @@ import (
 
 var (
 	Probers = map[string]ProbeFn{
-		"http": ProbeHTTP,
-		"tcp":  ProbeTCP,
-		"icmp": ProbeICMP,
-		"dns":  ProbeDNS,
-		"grpc": ProbeGRPC,
+		"http":  ProbeHTTP,
+		"tcp":   ProbeTCP,
+		"icmp":  ProbeICMP,
+		"dns":   ProbeDNS,
+		"grpc":  ProbeGRPC,
+		"proxy": ProbePROXY,
 	}
 	moduleUnknownCounter = prometheus.NewCounter(prometheus.CounterOpts{
 		Name: "blackbox_module_unknown_total",

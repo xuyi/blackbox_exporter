@@ -52,10 +52,11 @@ var (
 
 	// DefaultModule set default configuration for the Module
 	DefaultModule = Module{
-		HTTP: DefaultHTTPProbe,
-		TCP:  DefaultTCPProbe,
-		ICMP: DefaultICMPProbe,
-		DNS:  DefaultDNSProbe,
+		HTTP:  DefaultHTTPProbe,
+		TCP:   DefaultTCPProbe,
+		ICMP:  DefaultICMPProbe,
+		DNS:   DefaultDNSProbe,
+		PROXY: DefaultPROXYProbe,
 	}
 
 	// DefaultHTTPProbe set default value for HTTPProbe
@@ -87,6 +88,8 @@ var (
 		IPProtocolFallback: true,
 		Recursion:          true,
 	}
+
+	DefaultPROXYProbe = PROXYProbe{}
 )
 
 func init() {
@@ -199,6 +202,13 @@ type Module struct {
 	ICMP    ICMPProbe     `yaml:"icmp,omitempty"`
 	DNS     DNSProbe      `yaml:"dns,omitempty"`
 	GRPC    GRPCProbe     `yaml:"grpc,omitempty"`
+	PROXY   PROXYProbe    `yaml:"proxy,omitempty"`
+}
+
+type PROXYProbe struct {
+	// Use GET/Head Method only and random request url
+	Method    string   `yaml:"method,omitempty"`
+	CheckUrls []string `yaml:"check_urls,omitempty"`
 }
 
 type HTTPProbe struct {
